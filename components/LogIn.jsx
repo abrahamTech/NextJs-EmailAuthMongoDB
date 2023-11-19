@@ -36,9 +36,9 @@ export default function LogIn() {
                         Error message
                     </div>
                     
-                    <Link href={"/register"} className="text-sm mt-3 text-right">
-                        Don't have an acount? <span className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_2px] bg-no-repeat bg-bottom">Register</span>
-                    </Link>
+                    <div href={"/register"} className="text-sm mt-3 text-right">
+                        Don't have an acount? <Link href={"/register"} className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_2px] bg-no-repeat bg-bottom">Register</Link>
+                    </div>
 
                 </form>
             </div>

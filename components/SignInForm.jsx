@@ -10,7 +10,7 @@ export default function SignInForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault(); //If click on the submit button, the page doesn't reload
 
         if(!name || !email || !password) {
@@ -18,9 +18,29 @@ export default function SignInForm() {
             return;
         }
 
-        if(name && email && password) {
-            setError("");
-            return;
+        try {
+            const res = await fetch("api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name, 
+                    email, 
+                    password,
+                }),
+            });
+
+            if(res.ok) {
+                const form = e.target;
+                setError("");
+                form.reset();
+            } else {
+                console.log("User registration failed.");
+            }
+
+        } catch (error) {
+            console.log("Error during registration: ", error);
         }
     };
 
@@ -73,9 +93,9 @@ export default function SignInForm() {
                         </div>
                     )}
                     
-                    <Link href={"/"} className="text-sm mt-3 text-right">
-                        Already have an acount? <span className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</span>
-                    </Link>
+                    <div className="text-sm mt-3 text-right">
+                        Already have an acount? <Link href={"/"} className="bg-gradient-to-r from-rose-400 via-fuchsia-500 to-indigo-500 bg-[length:100%_2px] bg-no-repeat bg-bottom">Log In</Link>
+                    </div>
 
                 </form>
             </div>
