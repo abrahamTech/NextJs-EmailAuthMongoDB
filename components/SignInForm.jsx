@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function SignInForm() {
 
@@ -9,6 +10,8 @@ export default function SignInForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+
+    const router = useRouter();
 
     const handleSubmit = async (e) => {
         e.preventDefault(); //If click on the submit button, the page doesn't reload
@@ -51,6 +54,7 @@ export default function SignInForm() {
                 const form = e.target;
                 setError("");
                 form.reset();
+                router.push("/");
             } else {
                 console.log("User registration failed.");
             }
